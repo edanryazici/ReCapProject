@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -18,30 +19,7 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public void AddedIf(Car entity)
-        {
-            using (ReCapProjectContext context = new ReCapProjectContext())
-            {
-                try
-                {
-                    if (entity.Description.Length > 2 && entity.DailyPrice > 0)
-                    {
-                        var addedIfEntity = context.Entry(entity);
-                        addedIfEntity.State = EntityState.Added;
-                        context.SaveChanges();
-                        Console.WriteLine("Ekleme Başarılı!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Ekleme Başarısız! Araba açıklaması 2 karakterden uzun olmalı ve günlük fiyat pozitif bir değer olmalıdır.");
-                    }
-                }
-                catch (DbUpdateException ex)
-                {
-                    Console.WriteLine("Veritabanına kayıt sırasında bir hata oluştu: " + ex.InnerException.Message);
-                }
-            }
-        }
+        
 
         public List<Car> GetAll()
         {
@@ -56,6 +34,11 @@ namespace Business.Concrete
         public List<Car> GetByColorId(int coloId)
         {
             return _carDal.GetAll(p => p.ColorId == coloId);
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
         }
     }
 }
