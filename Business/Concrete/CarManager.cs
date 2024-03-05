@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Entities.DTOs;
+using Core.Utilities.Result;
+using Business.Constans;
 
 namespace Business.Concrete
 {
@@ -19,26 +21,47 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        
-
-        public List<Car> GetAll()
+        public IResult Add(Car car)
         {
-            return _carDal.GetAll();
+            //iş şartları 
+            //bussines codes
+            if (car.CarName.Length<2)
+            {
+                return new ErrorResult(Messages.CarNameInValid);
+
+            }
+
+            _carDal.Add(car);
+            return new SuccessResult(Messages.CarAdded);
         }
 
-        public List<Car> GetByBrandId(int brandId)
+        public IDataResult<List<Car>> GetAll()
         {
-            return _carDal.GetAll(p => p.BrandId == brandId);
+            if (DateTime.Now.Hour==12)
+            {
+                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 
-        public List<Car> GetByColorId(int coloId)
+        public IDataResult<List<Car>> GetByBrandId(int brandId)
         {
-            return _carDal.GetAll(p => p.ColorId == coloId);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == brandId));
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public IDataResult<List<Car>> GetByColorId(int coloId)
         {
-            return _carDal.GetCarDetails();
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == coloId));
+        }
+
+        public IDataResult<Car> GetById(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
     }
 }
