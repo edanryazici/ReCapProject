@@ -4,18 +4,22 @@ using System.Text;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace DataAccess.Concrete.EntityFrameWork
 {
     public class ReCapProjectContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;DataBase=ReCapProject;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=EDANUR;DataBase=ReCapProject;Trusted_Connection=true");
         }
 
-        public DbSet<Car> Car { get; set; }
-        public DbSet<Brand> Brand { get; set; }
-        public DbSet<Color> Color { get; set; }
-       
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Rental> Rentals { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+
     }
 }

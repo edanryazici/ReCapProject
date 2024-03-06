@@ -17,6 +17,7 @@ namespace Entities.Concrete
         public int ModelYear { get; set; }
         public int DailyPrice { get; set; }
         public string Description { get; set; }
+        public bool CarState { get; set; }
 
     }
 }

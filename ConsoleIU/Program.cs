@@ -14,7 +14,7 @@ namespace ConsoleIU
             //CarGetAllTest();
 
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var carDetail in carManager.GetCarDetails())
+            foreach (var carDetail in carManager.GetCarDetails().Data)
             {
                 Console.WriteLine(carDetail.CarName+"/ Fiyatı: "+ carDetail.DailyPrice+"/ Rengi: "+carDetail.ColorName);
             }
@@ -23,7 +23,7 @@ namespace ConsoleIU
         private static void CarGetAllTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetAll().Data)
             {
                 Console.WriteLine(car.Description);
             }
