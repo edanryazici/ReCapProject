@@ -11,13 +11,13 @@ namespace ConsoleIU
     {
         static void Main(string[] args)
         {
-            //CarGetAllTest();
+            CarGetAllTest();
 
-            CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var carDetail in carManager.GetCarDetails().Data)
-            {
-                Console.WriteLine(carDetail.CarName+"/ Fiyatı: "+ carDetail.DailyPrice+"/ Rengi: "+carDetail.ColorName);
-            }
+            //CarManager carManager = new CarManager(new EfCarDal());
+            //foreach (var carDetail in carManager.GetCarDetails().Data)
+            //{
+            //    Console.WriteLine(carDetail.CarName+"/ Fiyatı: "+ carDetail.DailyPrice+"/ Rengi: "+carDetail.ColorName);
+            //}
         }
 
         private static void CarGetAllTest()
