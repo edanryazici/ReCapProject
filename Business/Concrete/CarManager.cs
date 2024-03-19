@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Entities.DTOs;
 using Core.Utilities.Result;
 using Business.Constans;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -20,16 +22,10 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            //iş şartları 
-            //bussines codes
-            if (car.CarName.Length<2)
-            {
-                return new ErrorResult(Messages.CarNameInValid);
-
-            }
+           
 
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
