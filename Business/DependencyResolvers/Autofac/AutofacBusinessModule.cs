@@ -18,6 +18,9 @@ namespace Business.DependencyResolvers.Autofac
         {
             builder.RegisterType<CarManager>().As<ICarService>(); //startup da service için yaptığımız geçici tanımlamanın daha iyi halini kuruyoruz
             builder.RegisterType<EfCarDal>().As<ICarDal>();
+            builder.RegisterType<CarImageManager>().As<ICarImageDal>();
+            builder.RegisterType<EfCarImageDal>().As<ICarDal>();
+
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
